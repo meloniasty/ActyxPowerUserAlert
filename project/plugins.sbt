@@ -1,0 +1,5 @@
+addSbtPlugin("com.geirsson"      % "sbt-scalafmt" % "0.4.9")
+addSbtPlugin("com.typesafe.sbt"  % "sbt-git"      % "0.8.5")
+addSbtPlugin("de.heikoseeberger" % "sbt-header"   % "1.6.0")
+addSbtPlugin("com.scalapenos"    % "sbt-prompt"   % "1.0.0")
+addSbtPlugin("org.scalastyle"    % "scalastyle-sbt-plugin" % "0.8.0")
