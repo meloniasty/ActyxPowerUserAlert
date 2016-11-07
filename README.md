@@ -1,6 +1,10 @@
-# AtyxPowerUserAlert #
+# ActyxPowerUserAlert #
 
 Welcome to ActyxPowerUserAlert!
+
+### Running application
+
+`sbt run`
 
 ## Contribution policy ##
 
