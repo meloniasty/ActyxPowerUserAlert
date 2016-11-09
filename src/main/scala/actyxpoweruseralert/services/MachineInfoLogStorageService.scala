@@ -21,10 +21,13 @@
 
 package actyxpoweruseralert.services
 
+import java.util.concurrent.ConcurrentHashMap
+
 import actyxpoweruseralert.model._
 import com.typesafe.scalalogging.LazyLogging
 
-import scala.concurrent.{ ExecutionContext, Future }
+import scala.collection.convert.decorateAsScala._
+import scala.concurrent.{ExecutionContext, Future}
 
 trait MachineInfoLogStorageService {
   def save(machineId: MachineId, machine: MachineInfo): Future[Unit]
@@ -35,7 +38,7 @@ class InMemoryMachinesLogStorageService(implicit val ex: ExecutionContext)
     extends MachineInfoLogStorageService
     with LazyLogging {
 
-  var machines: Map[MachineId, List[MachineInfo]] = Map.empty
+  private var machines = new ConcurrentHashMap[MachineId,List[MachineInfo]]().asScala
 
   override def save(machineId: MachineId, machine: MachineInfo): Future[Unit] =
     Future {

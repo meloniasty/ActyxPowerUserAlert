@@ -45,7 +45,7 @@ class MachineActor(api: MachineParkApi,
 
           storage
             .save(msg.machineId, machine)
-            .map(_ => {
+            .foreach(_ => {
               processEventuallyAlert(msg.machineId, machine)
             })
 
