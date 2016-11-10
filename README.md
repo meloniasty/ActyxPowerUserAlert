@@ -2,6 +2,8 @@
 
 Welcome to ActyxPowerUserAlert!
 
+https://www.actyx.io/en/tech-challenges/ - Challenge 1: Power Usage Alert
+
 ### Running application
 
 `sbt run`

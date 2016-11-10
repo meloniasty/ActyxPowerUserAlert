@@ -1,6 +1,8 @@
 lazy val ActyxPowerUserAlert =
   project.in(file(".")).enablePlugins(AutomateHeaderPlugin, GitVersioning)
 
+resolvers += Resolver.jcenterRepo
+
 libraryDependencies ++= Vector(
   Library.akkaActor,
   Library.akkaContrib,
