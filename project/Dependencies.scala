@@ -2,12 +2,12 @@ import sbt._
 
 object Version {
   final val Scala     = "2.11.8"
-  final val ScalaTest = "3.0.0"
+  final val ScalaTest = "3.0.1"
   final val Play = "2.5.9"
   final val Akka = "2.4.12"
   final val ScalaLogging = "3.5.0"
   final val Logback = "1.1.7"
-  final val IheartFicus = "1.2.0"
+  final val IheartFicus = "1.3.3"
 }
 
 object Library {

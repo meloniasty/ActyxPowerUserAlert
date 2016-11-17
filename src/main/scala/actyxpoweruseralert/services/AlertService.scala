@@ -25,7 +25,7 @@ import java.util.concurrent.ConcurrentHashMap
 
 import actyxpoweruseralert.actors.StdOutAlertActor
 import actyxpoweruseralert.model.MachineId
-import akka.actor.{ActorSystem, Cancellable}
+import akka.actor.{ ActorSystem, Cancellable }
 import scala.collection.convert.decorateAsScala._
 import scala.concurrent.Future
 
@@ -38,13 +38,14 @@ trait AlertService {
 
 class ActorAlertService(system: ActorSystem,
                         storage: MachineInfoLogStorageService)
-  extends AlertService {
+    extends AlertService {
 
   import system.dispatcher
 
   import scala.concurrent.duration._
 
-  private var machinesSchedulers = new ConcurrentHashMap[MachineId, Cancellable]().asScala
+  private var machinesSchedulers =
+    new ConcurrentHashMap[MachineId, Cancellable]().asScala
 
   private val stdOutActor = system.actorOf(StdOutAlertActor.props(storage))
 
