@@ -21,8 +21,9 @@
 
 package actyxpoweruseralert.actors
 
+import actyxpoweruseralert.actors.MachineActor.CheckAlert
 import akka.actor.{ Actor, ActorLogging, ActorRef, Props }
-import actyxpoweruseralert.model.{ MachineInfo, MachineEndpoint, MachineId }
+import actyxpoweruseralert.model.{ MachineEndpoint, MachineId, MachineInfo }
 import actyxpoweruseralert.services._
 
 import scala.util.{ Failure, Success }
@@ -45,9 +46,7 @@ class MachineActor(api: MachineParkApi,
 
           storage
             .save(msg.machineId, machine)
-            .foreach(_ => {
-              processEventuallyAlert(msg.machineId, machine)
-            })
+            .foreach(_ => self ! CheckAlert(msg.machineId, machine))
 
           mainActor ! msg
 
@@ -58,6 +57,9 @@ class MachineActor(api: MachineParkApi,
           log.error(ex, "Occurred error when retrieving machine info")
           mainActor ! msg
       }
+
+    case CheckAlert(id, info) =>
+      processEventuallyAlert(id, info)
   }
 
   private def processEventuallyAlert(machineId: MachineId,
@@ -83,4 +85,6 @@ object MachineActor {
             storage: MachineInfoLogStorageService,
             alarmServices: List[AlertService]): Props =
     Props(new MachineActor(api, mainActor, storage, alarmServices))
+
+  case class CheckAlert(machineId: MachineId, machineInfo: MachineInfo)
 }
